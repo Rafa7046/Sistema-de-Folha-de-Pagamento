@@ -1,28 +1,18 @@
-import random
+from utils import check_type_of_worker_payment, find_worker
 
 employees = []
-Id_list = []
 
 class Employee:
 
-    def __init__(self, name, address, type, Id):
+    def __init__(self, name, address, type_of_worker, Id):
         self.name = name
         self.address = address
-        self.type = type
+        self.type_of_worker = check_type_of_worker_payment(type_of_worker)
         self.Id = Id
-
-    def new_employee(name, address, type):
-        Id = random.randint(1, 10000)
-        while Id in Id_list:
-            Id = random.randint(1, 10000)
-        Id_list.append(Id)
-        employees.append( Employee(name, address, type, Id) )
+        self.print_data()
 
     def remove_employee(reference):
-        if type(reference) == int:
-            to_remove = next((employee for employee in employees if employee.Id == reference), None )
-        else:
-            to_remove = next((employee for employee in employees if employee.name == reference), None )
+        to_remove = find_worker(reference, employees)
 
         if to_remove == None:
             print("Esse funcionário não existe")
@@ -30,5 +20,5 @@ class Employee:
             employees.remove(to_remove)
 
     def print_data(self):
-        print(f"O nome do empregrado é {self.name} \nMora no endereço {self.address} \nÉ do tipo {self.type} \nID = {self.Id}")
+        print(f"O nome do empregrado é {self.name} \nMora no endereço {self.address} \nÉ do tipo {self.type_of_worker} \nID = {self.Id}")
 

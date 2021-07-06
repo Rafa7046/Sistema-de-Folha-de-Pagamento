@@ -1,8 +1,8 @@
-from employee import Employee, employees
-from interface import begining
+from employee import employees
+from interface import start
 
 while True:
-    begining()
+    start()
     if input("") == "Sim":
         break
 
