@@ -13,10 +13,18 @@ class Hourly:
         
         print(self.money)
 
-
 class Month:
-    pass
+    
+    def __init__(self):
+        self.salary = int(input("Quanto vai ser o salário do funcionário: "))
+        self.money = 0
 
 class Comission:
-    pass
-
+    
+    def __init__(self):
+        self.salary = int(input("Quanto vai ser o salário do funcionário: "))
+        self.comission_percent = int(input("Quanto vai ser a comissão do funcionário: "))/100
+        self.money = 0
+    
+    def sell_results(self, value):
+        self.money += (self.comission_percent*value)

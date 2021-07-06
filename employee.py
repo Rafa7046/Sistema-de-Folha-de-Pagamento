@@ -4,11 +4,13 @@ employees = []
 
 class Employee:
 
-    def __init__(self, name, address, type_of_worker, Id):
+    def __init__(self, name, address, type_of_worker, type_of_payment, Id):
         self.name = name
         self.address = address
         self.type_of_worker = check_type_of_worker_payment(type_of_worker)
         self.Id = Id
+        self.type_of_payment = type_of_payment
+        print("Foi adicionado o seguinte funcionário: ")
         self.print_data()
 
     def remove_employee(reference):
@@ -17,6 +19,7 @@ class Employee:
         if to_remove == None:
             print("Esse funcionário não existe")
         else:
+            print(f"O funcionário {to_remove.name} com Id = {to_remove.Id} foi removido.")
             employees.remove(to_remove)
 
     def print_data(self):

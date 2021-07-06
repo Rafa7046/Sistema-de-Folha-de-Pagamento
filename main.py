@@ -6,5 +6,5 @@ while True:
     if input("") == "Sim":
         break
 
-for worker in employees:
-    worker.print_data()
+# for worker in employees:
+#     worker.print_data()
