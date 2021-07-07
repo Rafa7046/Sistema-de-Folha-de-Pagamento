@@ -55,7 +55,7 @@ class Employee:
                     self.syndicate.info_edit("taxa do sindicato")
                 except:
                     print("Funcionário não faz parte de nehum sindicato")
-            elif info.lower() == "sair":
+            if input("Deseja alterar mais algum dado? [sim] [nao]\n") == "nao":
                 break
 
     def print_data(self):
