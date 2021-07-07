@@ -8,7 +8,7 @@ def choice():
         address = input("Digite o endereço do funcionário: ")
         type_of_worker = input("Digite o tipo do funcionário: ")
         type_of_payment = input("Digite o método de pagamento de sua preferência: ")
-        syndicate = input("O funcionário faz parte de sindicatos? [sim] [nao]")
+        syndicate = input("O funcionário faz parte de sindicatos? [sim] [nao]\n")
         if syndicate.lower() == "sim":
             syndicate = True
         else:
@@ -36,6 +36,9 @@ def choice():
         value = int(input("Qual foi o valor da taxa: "))
         find_worker(Id, employees).syndicate.service_fee(value)
         print(f"Foi adicionado o valor da taxa de serviço ao funcionário {find_worker(Id, employees).name} com Id = {Id}")
+    elif option == "6" or option.lower() == "alterar detalhes de um empregado":
+        Id = int(input("Digite o Id do funcionário: "))
+        find_worker(Id, employees).edit_info()
 
 
 def start():
@@ -45,4 +48,5 @@ def start():
     print("[3] Lançar um cartão de ponto")
     print("[4] Lançar um Resultado Venda")
     print("[5] Lançar uma taxa de serviço")
+    print("[6] Alterar detalhes de um empregado")
     choice()

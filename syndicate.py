@@ -11,3 +11,14 @@ class Syndicate:
 
     def service_fee(self, value):
         self.total_fee += value 
+
+
+    def info_edit(self, reference):
+        if reference.lower() == "id":
+            self.Id = input("Digite o novo Id do sindicato: ")
+        elif reference.lower() == "taxa do sindicato":
+            self.syndicate_fee == input("Digite a nova taxa de sindicato do funcionário: ")
+
+
+    def delete(self):
+        del self
