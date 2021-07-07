@@ -20,3 +20,10 @@ def generate_id():
         Id = random.randint(1, 10000)
     Id_list.append(Id)
     return Id
+
+def generate_syndicate_id(syndicate_Ids):
+    Id = random.randint(10000, 20000)
+    while Id in syndicate_Ids:
+        Id = random.randint(10000, 20000)
+    syndicate_Ids.append(Id)
+    return Id

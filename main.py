@@ -1,10 +1,6 @@
-from employee import employees
 from interface import start
 
 while True:
     start()
-    if input("") == "Sim":
+    if input("Deseja realizar outra operação? [sim] [nao]\n") == "nao":
         break
-
-# for worker in employees:
-#     worker.print_data()

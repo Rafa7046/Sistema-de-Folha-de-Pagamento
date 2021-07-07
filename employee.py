@@ -1,15 +1,20 @@
+from syndicate import Syndicate
 from utils import check_type_of_worker_payment, find_worker
 
 employees = []
 
 class Employee:
 
-    def __init__(self, name, address, type_of_worker, type_of_payment, Id):
+    def __init__(self, name, address, type_of_worker, type_of_payment, syndicate, Id):
         self.name = name
         self.address = address
         self.type_of_worker = check_type_of_worker_payment(type_of_worker)
-        self.Id = Id
         self.type_of_payment = type_of_payment
+        if syndicate:
+            self.syndicate = Syndicate()
+        else:
+            self.syndicate = "Funcionário não faz parte de nenehum sindicato."
+        self.Id = Id
         print("Foi adicionado o seguinte funcionário: ")
         self.print_data()
 
