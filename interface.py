@@ -39,6 +39,7 @@ def choice():
     elif option == "6" or option.lower() == "alterar detalhes de um empregado":
         Id = int(input("Digite o Id do funcionário: "))
         find_worker(Id, employees).edit_info()
+        find_worker(Id, employees).print_data()
 
 
 def start():

@@ -6,5 +6,5 @@ while True:
     if input("Deseja realizar outra operação? [sim] [nao]\n") == "nao":
         break
 
-for workers in employees:
-    workers.print_data()
+# for workers in employees:
+#     workers.print_data()
