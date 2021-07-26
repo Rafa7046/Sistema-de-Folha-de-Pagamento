@@ -1,5 +1,6 @@
 from utils import find_worker, generate_id
 from employee import Employee, employees
+from time_payments import find_day
 
 def choice():
     option = input("")
@@ -40,7 +41,10 @@ def choice():
         Id = int(input("Digite o Id do funcionário: "))
         find_worker(Id, employees).edit_info()
         find_worker(Id, employees).print_data()
-
+    elif option == "7" or option.lower() == "rodar a folha de pagamento para hoje":
+        day, month, year = input("Qual o data para rodar a folhar? DD/MM/YYYY\n").split()
+        find_day(int(day), int(month), int(year))
+        
 
 def start():
     print("Selecione a opção desejada")
@@ -50,4 +54,5 @@ def start():
     print("[4] Lançar um Resultado Venda")
     print("[5] Lançar uma taxa de serviço")
     print("[6] Alterar detalhes de um empregado")
+    print("[7] Rodar a folha de pagamento")
     choice()

@@ -1,5 +1,4 @@
 import dill
-import pickle
 from employee import employees
 
 employee_json = {}
@@ -18,4 +17,4 @@ employee_json = {}
 
 def save_object():
     with open('data.pkl', 'wb') as output:
-        dill.dump(employees, output, pickle.HIGHEST_PROTOCOL)
+        dill.dump(employees, output, dill.HIGHEST_PROTOCOL)
