@@ -14,12 +14,21 @@ class Hourly:
         
         print(self.money)
 
+    def paid(self):
+        value = self.money
+        self.money = 0
+        return value
+
 class Month:
     
     def __init__(self):
         self.salary = int(input("Quanto vai ser o salário do funcionário: "))
         self.money = self.salary
         self.payment_agenda = "mensalmente"
+
+    def paid(self):
+        value = self.money
+        return value
 
 class Comission:
     
@@ -31,3 +40,8 @@ class Comission:
     
     def sell_results(self, value):
         self.money += (self.comission_percent*value)
+
+    def paid(self):
+        value = self.money
+        self.money = self.salary
+        return value
