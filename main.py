@@ -1,17 +1,13 @@
-import dill
-from format import save_object
-from employee import Employee, employees
+from format import confirm_changes, load_changes
 from interface import start
 
+employees = []
+
 while True:
-    start()
+    start(employees)
+    confirm_changes(employees)
+    employees = load_changes()
+    for worker in employees:
+        worker.print_data()
     if input("Deseja realizar outra operação? [sim] [nao]\n") == "nao":
         break
-
-# save_object()
-
-# with open('data.pkl', 'rb') as input:
-#     employees = dill.load(input)
-
-# for workers in employees:
-#     workers.print_data()

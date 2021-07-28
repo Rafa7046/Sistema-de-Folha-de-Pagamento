@@ -52,25 +52,4 @@ def pay_employee(employees, day, month, year):
                 if day in days:
                     payment = employee.type_of_worker.paid() - sindicate
                     print(f"O empregado {employee.Id} foi pago R$ {payment}")
-
-# def payment_every_week(day, month, year):
-#     cal = calendar.monthcalendar(year, month)
-#     a = 0
-#     x, y = cal.shape
-#     first_week = cal[0]
-#     second_week = cal[1]
-#     third_week = cal[2]
-#     forth_week = cal[3]
-#     number_of_weeks = 4
-#     try:
-#         fifith_week = cal[4]
-#         number_of_weeks = 5
-#     except:
-#         pass
-#     try:
-#         sixth_week = cal[5]
-#         number_of_weeks = 6
-#     except:
-#         pass
-#     while a < y:
-#         if cal[a][calendar.find_day(day, month, year)]:
+                    

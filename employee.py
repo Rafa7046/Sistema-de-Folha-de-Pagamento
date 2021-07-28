@@ -1,7 +1,7 @@
 from syndicate import Syndicate
 from utils import check_type_of_worker_payment, find_worker
 
-employees = []
+# employees = []
 
 class Employee:
 
@@ -18,7 +18,7 @@ class Employee:
         print("Foi adicionado o seguinte funcionário: ")
         self.print_data()
 
-    def remove_employee(reference):
+    def remove_employee(reference, employees):
         to_remove = find_worker(reference, employees)
 
         if to_remove == None:

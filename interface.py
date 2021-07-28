@@ -1,8 +1,8 @@
 from utils import find_worker, generate_id
-from employee import Employee, employees
+from employee import Employee
 from time_payments import find_day, pay_employee
 
-def choice():
+def choice(employees):
     option = input("")
     if option=="1" or option.lower() == "adicionar um funcionário" or option.lower() == "adicionar um funcionario":
         name = input("Digite o nome do funcionário: ")
@@ -18,7 +18,7 @@ def choice():
         employees.append(Employee(name, address, type_of_worker,type_of_payment, syndicate, generate_id()))
     elif option=="2" or option.lower() == "remover um funcionário" or option.lower() == "remover um funcionario":
         removed = int(input("Digite o Id ou nome do funcionário que deseja remover: "))
-        Employee.remove_employee(removed)
+        Employee.remove_employee(removed, employees)
         print("================================================")
     elif option == "3" or option.lower() == "lançar cartão de ponto" or option.lower() == "lançar cartão de pontos" or option.lower() == "lancar cartao de ponto" or option.lower() == "lancar cartao de pontos":
         Id = int(input("Digite o Id do funcionário: "))
@@ -44,9 +44,13 @@ def choice():
     elif option == "7" or option.lower() == "rodar a folha de pagamento para hoje":
         day, month, year = input("Qual o data para rodar a folhar? DD/MM/YYYY\n").split()
         pay_employee(employees, int(day), int(month), int(year))
+    elif option == "0" or option.lower == "ver informacoes dos funcionarios":
+        for x in employees:
+            x.print_data()
 
-def start():
+def start(employees):
     print("Selecione a opção desejada")
+    print("[0] Ver informações dos funcionários")
     print("[1] Adicionar um funcionário")
     print("[2] Remover um funcionário")
     print("[3] Lançar um cartão de ponto")
@@ -54,4 +58,4 @@ def start():
     print("[5] Lançar uma taxa de serviço")
     print("[6] Alterar detalhes de um empregado")
     print("[7] Rodar a folha de pagamento")
-    choice()
+    choice(employees)

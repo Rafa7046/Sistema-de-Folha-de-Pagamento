@@ -1,20 +1,18 @@
 import dill
-from employee import employees
 
-employee_json = {}
-
-# def format_employee():
-#     for x in employees:
-#         employee_json['data'] = []
-#         employee_json['data'].append({
-#             'name': x.name ,
-#             'address': x.address ,
-#             'type_of_worker': x.type_of_worker ,
-#             'type_of_payment': x.type_of_payment ,
-#             'syndicate': x.syndicate ,
-#             'Id': x.Id ,
-#         })
-
-def save_object():
+def save_object(employees):
     with open('data.pkl', 'wb') as output:
         dill.dump(employees, output, dill.HIGHEST_PROTOCOL)
+
+def confirm_changes(employees):
+    if input("Tem certeza dessa alteração? Se quiser desfazer a operação digite 'nao' caso queira manter as alterações digite 'sim' :\n") == "nao":
+        if input("Operação foi desfeita, caso queira refazer digite 'refazer' caso contrario digite 'continuar': \n") == "continuar":
+            return
+        else:
+            confirm_changes()
+    save_object(employees)
+    return
+
+def load_changes(): 
+    with open('data.pkl', 'rb') as input:
+        return dill.load(input)
