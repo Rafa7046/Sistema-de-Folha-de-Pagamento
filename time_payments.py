@@ -1,5 +1,14 @@
 import calendar
-import numpy
+
+agendas = ["semanalmente", "mensalmente", "bi-semanalmente"]
+
+def avaliable_agendas():
+    a = 0
+    for x in agendas:
+        print(f"[{a}] :  {x}")
+        a += 1
+    chosen = int(input())
+    return agendas[chosen]
 
 def int_to_str(day):
     days_week = [calendar.MONDAY, calendar.TUESDAY, calendar.WEDNESDAY, calendar.THURSDAY, calendar.FRIDAY, calendar.SATURDAY, calendar.SUNDAY]
@@ -52,4 +61,3 @@ def pay_employee(employees, day, month, year):
                 if day in days:
                     payment = employee.type_of_worker.paid() - sindicate
                     print(f"O empregado {employee.Id} foi pago R$ {payment}")
-                    

@@ -1,6 +1,6 @@
 from utils import find_worker, generate_id
 from employee import Employee
-from time_payments import find_day, pay_employee
+from time_payments import avaliable_agendas, pay_employee
 
 def choice(employees):
     option = input("")
@@ -47,6 +47,13 @@ def choice(employees):
     elif option == "0" or option.lower == "ver informacoes dos funcionarios":
         for x in employees:
             x.print_data()
+    elif option == "8" or option.lower == "alterar agenda de pagamento":
+        Id = int(input("Digite o Id do funcionário: "))
+        print("Estão disponíveis as seguintes agendas de pagamento: ")
+        print("Digite o número respectivo a agenda desejada.")
+        new_agenda = avaliable_agendas()
+        find_worker(Id, employees).type_of_worker.payment_agenda = new_agenda
+        print(f"Foi alterado a agenda de pagamento do funcionário {Id} para {new_agenda}")
 
 def start(employees):
     print("Selecione a opção desejada")
@@ -58,4 +65,5 @@ def start(employees):
     print("[5] Lançar uma taxa de serviço")
     print("[6] Alterar detalhes de um empregado")
     print("[7] Rodar a folha de pagamento")
+    print("[8] Alterar agenda de pagamento")
     choice(employees)
