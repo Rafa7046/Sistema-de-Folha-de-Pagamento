@@ -1,8 +1,6 @@
 from syndicate import Syndicate
 from utils import check_type_of_worker_payment, find_worker
 
-# employees = []
-
 class Employee:
 
     def __init__(self, name, address, type_of_worker, type_of_payment, syndicate, Id):
@@ -59,5 +57,5 @@ class Employee:
                 break
 
     def print_data(self):
-        print(f"O nome do empregrado é {self.name} \nMora no endereço {self.address} \nÉ do tipo {self.type_of_worker} \nID = {self.Id}")
+        print(f"O nome do empregrado é {self.name} \nMora no endereço {self.address} \nÉ do tipo {self.type_of_worker.name_type} \nID = {self.Id}")
 

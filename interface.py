@@ -57,6 +57,9 @@ def choice(employees):
     elif option == "9" or option.lower == "criar agenda de pagamento":
         create_agenda()
         print("A nova agenda foi criada e já está disponível para ser escolhida")
+    elif option == "-1" or option.lower == "sair":
+        print("\n Sistema encerrado")
+        exit()
 
 def start(employees):
     print("Selecione a opção desejada")
@@ -70,4 +73,5 @@ def start(employees):
     print("[7] Rodar a folha de pagamento")
     print("[8] Alterar agenda de pagamento")
     print("[9] Criar agenda de pagamento")
+    print("[-1] Sair")
     choice(employees)

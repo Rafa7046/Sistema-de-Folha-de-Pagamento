@@ -6,6 +6,8 @@ employees = []
 while True:
     start(employees)
     confirm_changes(employees)
-    employees = load_changes()
-    if input("Deseja realizar outra operação? [sim] [nao]\n") == "nao":
-        break
+    try:
+        employees = load_changes()
+    except:
+        pass
+6
