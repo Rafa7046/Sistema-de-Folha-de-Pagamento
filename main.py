@@ -1,13 +1,11 @@
-from format import confirm_changes, load_changes
+from format import load_changes
 from interface import start
 
 employees = []
 
 while True:
-    start(employees)
-    confirm_changes(employees)
     try:
-        employees = load_changes()
+        employees = load_changes("data.pkl")
     except:
         pass
-6
+    employees = start(employees)

@@ -22,7 +22,8 @@ class Employee:
         if to_remove == None:
             print("Esse funcionário não existe")
         else:
-            print(f"O funcionário {to_remove.name} com Id = {to_remove.Id} foi removido.")
+            print(f"O funcionário {to_remove.name} com Id = {to_remove.Id} foi removido.\n")
+            print("================================================")
             employees.remove(to_remove)
 
     def edit_info(self):

@@ -1,9 +1,26 @@
+from format import end_code, load_changes, save_object
 from utils import find_worker, generate_id
 from employee import Employee
 from time_payments import avaliable_agendas, create_agenda, pay_employee
 
 def choice(employees):
     option = input("")
+    if option == "10":
+        undo_redo = input("[0] Desfazer\n[1] Refazer\n ")
+        if undo_redo == "0":
+            save_object(employees, "data_backup.pkl")
+            try:
+                employees = load_changes("data.pkl")
+            except:
+                employees = []
+            save_object(employees, "data.pkl")
+        elif undo_redo == "1":
+            employees = load_changes("data_backup.pkl")
+        return employees
+    elif option == "0" or option == "9" or len(employees) == 0:
+        pass
+    else:
+        save_object(employees, "data.pkl")
     if option=="1" or option.lower() == "adicionar um funcionário" or option.lower() == "adicionar um funcionario":
         name = input("Digite o nome do funcionário: ")
         address = input("Digite o endereço do funcionário: ")
@@ -14,12 +31,11 @@ def choice(employees):
             syndicate = True
         else:
             syndicate = False
-        print("================================================")
         employees.append(Employee(name, address, type_of_worker,type_of_payment, syndicate, generate_id()))
+        print("================================================")
     elif option=="2" or option.lower() == "remover um funcionário" or option.lower() == "remover um funcionario":
         removed = int(input("Digite o Id ou nome do funcionário que deseja remover: "))
         Employee.remove_employee(removed, employees)
-        print("================================================")
     elif option == "3" or option.lower() == "lançar cartão de ponto" or option.lower() == "lançar cartão de pontos" or option.lower() == "lancar cartao de ponto" or option.lower() == "lancar cartao de pontos":
         Id = int(input("Digite o Id do funcionário: "))
         hours_worked = int(input("O funcionário trbalhou por quantas horas: "))
@@ -59,10 +75,13 @@ def choice(employees):
         print("A nova agenda foi criada e já está disponível para ser escolhida")
     elif option == "-1" or option.lower == "sair":
         print("\n Sistema encerrado")
+        end_code()
         exit()
+    print("================================================ \n\n")
+    return employees
 
 def start(employees):
-    print("Selecione a opção desejada")
+    print("Selecione a opção desjeada")
     print("[0] Ver informações dos funcionários")
     print("[1] Adicionar um funcionário")
     print("[2] Remover um funcionário")
@@ -73,5 +92,7 @@ def start(employees):
     print("[7] Rodar a folha de pagamento")
     print("[8] Alterar agenda de pagamento")
     print("[9] Criar agenda de pagamento")
+    print("[10] Desfazer ou refazer última operação")
     print("[-1] Sair")
-    choice(employees)
+    employees = choice(employees)
+    return employees
