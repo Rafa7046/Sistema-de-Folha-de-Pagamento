@@ -5,6 +5,7 @@ from time_payments import avaliable_agendas, create_agenda, pay_employee
 
 def choice(employees):
     option = input("")
+    print("================================================")
     if option == "10":
         undo_redo = input("[0] Desfazer\n[1] Refazer\n ")
         if undo_redo == "0":
@@ -32,7 +33,6 @@ def choice(employees):
         else:
             syndicate = False
         employees.append(Employee(name, address, type_of_worker,type_of_payment, syndicate, generate_id()))
-        print("================================================")
     elif option=="2" or option.lower() == "remover um funcionário" or option.lower() == "remover um funcionario":
         removed = int(input("Digite o Id ou nome do funcionário que deseja remover: "))
         Employee.remove_employee(removed, employees)
@@ -41,13 +41,11 @@ def choice(employees):
         hours_worked = int(input("O funcionário trbalhou por quantas horas: "))
         find_worker(Id, employees).type_of_worker.time_cards(hours_worked)
         print(f"Foi batido o ponto do funcionário {find_worker(Id, employees).name} com {hours_worked} de trabalho")
-        print("================================================")
     elif option == "4" or option.lower() == "lançar um resultado venda" or option.lower() == "lancar um resultado venda":
         Id = int(input("Digite o Id do funcionário: "))
         value = int(input("Qual foi o valor da venda: "))
         find_worker(Id, employees).type_of_worker.sell_results(value)
         print(f"Foi adicionado o valor da comissão ao funcionário {find_worker(Id, employees).name} com Id = {Id}")
-        print("================================================")
     elif option == "5" or option.lower() == "lançar uma taxa de serviço" or option == "lancar uma taxa de servico":
         Id = int(input("Digite o Id do funcionário: "))
         value = int(input("Qual foi o valor da taxa: "))
@@ -61,8 +59,11 @@ def choice(employees):
         day, month, year = input("Qual o data para rodar a folhar? DD/MM/YYYY\n").split()
         pay_employee(employees, int(day), int(month), int(year))
     elif option == "0" or option.lower == "ver informacoes dos funcionarios":
-        for x in employees:
-            x.print_data()
+        if len(employees) == 0:
+            print("Não há nenhum funcionário")
+        else:
+            for x in employees:
+                x.print_data()
     elif option == "8" or option.lower == "alterar agenda de pagamento":
         Id = int(input("Digite o Id do funcionário: "))
         print("Estão disponíveis as seguintes agendas de pagamento: ")
