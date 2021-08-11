@@ -4,6 +4,7 @@ from employee import Employee
 from time_payments import avaliable_agendas, create_agenda, pay_employee
 
 def choice(employees):
+    var = 0
     option = input("")
     print("================================================")
     if option == "10":
@@ -17,7 +18,8 @@ def choice(employees):
             save_object(employees, "data.pkl")
         elif undo_redo == "1":
             employees = load_changes("data_backup.pkl")
-        return employees
+            var = 1
+        return employees, var
     elif option == "0" or option == "9" or len(employees) == 0:
         pass
     else:
@@ -79,7 +81,7 @@ def choice(employees):
         end_code()
         exit()
     print("================================================ \n\n")
-    return employees
+    return employees, var
 
 def start(employees):
     print("Selecione a opção desjeada")
@@ -95,5 +97,5 @@ def start(employees):
     print("[9] Criar agenda de pagamento")
     print("[10] Desfazer ou refazer última operação")
     print("[-1] Sair")
-    employees = choice(employees)
-    return employees
+    employees, var = choice(employees)
+    return employees, var
