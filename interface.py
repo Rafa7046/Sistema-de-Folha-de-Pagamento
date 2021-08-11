@@ -95,7 +95,7 @@ def start(employees):
     print("[7] Rodar a folha de pagamento")
     print("[8] Alterar agenda de pagamento")
     print("[9] Criar agenda de pagamento")
-    print("[10] Desfazer ou refazer última operação")
+    print("[10] Desfazer ou refazer")
     print("[-1] Sair")
     employees, var = choice(employees)
     return employees, var
