@@ -92,7 +92,7 @@ def pay_employee(employees, day, month, year):
                     payment = employee.type_of_worker.paid() - sindicate
                     print(f"O empregado {employee.Id} foi pago R$ {payment}")
             elif type_of_payment == "bi-semanalmente":
-                days = two_weeks(int_to_str(find_day(day, month, year)), month, year)
+                days = two_weeks(4, month, year)
                 if day in days:
                     payment = employee.type_of_worker.paid() - sindicate
                     print(f"O empregado {employee.Id} foi pago R$ {payment}")
