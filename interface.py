@@ -1,3 +1,4 @@
+from payments import Hourly, Month, Comission
 from format import end_code, load_changes, save_object
 from utils import find_worker, generate_id
 from employee import Employee
@@ -33,19 +34,26 @@ def choice(employees):
             syndicate = True
         else:
             syndicate = False
-        employees.append(Employee(name, address, type_of_worker,type_of_payment, syndicate, generate_id()))
+
+        if type_of_worker.lower() == "hourly" or type_of_worker.lower() == "hour" or type_of_worker.lower() == "hora":
+            employees.append(Hourly(name, address,type_of_payment, syndicate, generate_id()))
+        elif type_of_worker.lower() == "month" or type_of_worker.lower() == "monthly" or type_of_worker.lower() == "mensal":
+            employees.append(Month(name, address,type_of_payment, syndicate, generate_id()))
+        elif type_of_worker.lower() == "comission" or type_of_worker.lower() == "comissao":
+            employees.append(Comission(name, address,type_of_payment, syndicate, generate_id()))
+
     elif option=="2" or option.lower() == "remover um funcionário" or option.lower() == "remover um funcionario":
         removed = int(input("Digite o Id ou nome do funcionário que deseja remover: "))
         Employee.remove_employee(removed, employees)
     elif option == "3" or option.lower() == "lançar cartão de ponto" or option.lower() == "lançar cartão de pontos" or option.lower() == "lancar cartao de ponto" or option.lower() == "lancar cartao de pontos":
         Id = int(input("Digite o Id do funcionário: "))
         hours_worked = int(input("O funcionário trbalhou por quantas horas: "))
-        find_worker(Id, employees).type_of_worker.time_cards(hours_worked)
+        find_worker(Id, employees).time_cards(hours_worked)
         print(f"Foi batido o ponto do funcionário {find_worker(Id, employees).name} com {hours_worked} de trabalho")
     elif option == "4" or option.lower() == "lançar um resultado venda" or option.lower() == "lancar um resultado venda":
         Id = int(input("Digite o Id do funcionário: "))
         value = int(input("Qual foi o valor da venda: "))
-        find_worker(Id, employees).type_of_worker.sell_results(value)
+        find_worker(Id, employees).sell_results(value)
         print(f"Foi adicionado o valor da comissão ao funcionário {find_worker(Id, employees).name} com Id = {Id}")
     elif option == "5" or option.lower() == "lançar uma taxa de serviço" or option == "lancar uma taxa de servico":
         Id = int(input("Digite o Id do funcionário: "))
@@ -54,8 +62,32 @@ def choice(employees):
         print(f"Foi adicionado o valor da taxa de serviço ao funcionário {find_worker(Id, employees).name} com Id = {Id}")
     elif option == "6" or option.lower() == "alterar detalhes de um empregado":
         Id = int(input("Digite o Id do funcionário: "))
-        find_worker(Id, employees).edit_info()
-        find_worker(Id, employees).print_data()
+        worker = find_worker(Id, employees)
+        while True:
+            if worker.edit_info():
+                new_type = input("Qual o novo tipo do funcionário: ")
+                if new_type.lower() == "hourly" or new_type.lower() == "hour" or new_type.lower() == "hora":
+                    try:
+                        employees.append(Hourly(worker.name, worker.address,worker.type_of_payment, worker.syndicate, worker.Id, worker.per_hour))
+                    except:
+                        employees.append(Hourly(worker.name, worker.address,worker.type_of_payment, worker.syndicate, worker.Id))
+                elif new_type.lower() == "month" or new_type.lower() == "monthly" or new_type.lower() == "mensal":
+                    try:
+                        employees.append(Month(worker.name, worker.address,worker.type_of_payment, worker.syndicate, worker.Id, worker.salary))
+                    except:
+                        employees.append(Month(worker.name, worker.address,worker.type_of_payment, worker.syndicate, worker.Id))
+                elif new_type.lower() == "comission" or new_type.lower() == "comissao":
+                    try:
+                        employees.append(Comission(worker.name, worker.address, worker.type_of_payment, worker.syndicate, worker.Id, worker.salary, worker.comission_percent))
+                    except:
+                        try:
+                            employees.append(Comission(worker.name, worker.address, worker.type_of_payment, worker.syndicate, worker.Id, worker.salary))
+                        except:
+                            employees.append(Comission(worker.name, worker.address, worker.type_of_payment, worker.syndicate, worker.Id))
+                employees.remove(worker)
+                if input("Deseja alterar mais algum dado? [sim] [nao]\n") == "nao":
+                    break
+        worker.print_data()
     elif option == "7" or option.lower() == "rodar a folha de pagamento para hoje":
         day, month, year = input("Qual o data para rodar a folhar? DD/MM/YYYY\n").split()
         pay_employee(employees, int(day), int(month), int(year))
@@ -71,7 +103,7 @@ def choice(employees):
         print("Estão disponíveis as seguintes agendas de pagamento: ")
         print("Digite o número respectivo a agenda desejada.")
         new_agenda = avaliable_agendas()
-        find_worker(Id, employees).type_of_worker.payment_agenda = new_agenda
+        find_worker(Id, employees).payment_agenda = new_agenda
         print(f"Foi alterado a agenda de pagamento do funcionário {Id} para {new_agenda}")
     elif option == "9" or option.lower == "criar agenda de pagamento":
         create_agenda()

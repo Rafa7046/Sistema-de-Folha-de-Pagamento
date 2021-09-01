@@ -1,4 +1,3 @@
-from format import load_changes
 from interface import start
 
 employees = []

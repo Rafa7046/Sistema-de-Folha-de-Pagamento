@@ -74,7 +74,7 @@ def two_weeks(day_to_pay, month, year):
 def pay_employee(employees, day, month, year):
     for employee in employees:
         try:
-            type_of_payment = employee.type_of_worker.payment_agenda
+            type_of_payment = employee.payment_agenda
         except:
             pass
         sindicate = 0
@@ -85,37 +85,37 @@ def pay_employee(employees, day, month, year):
         if type_of_payment == "semanalmente" or type_of_payment == "mensalmente" or type_of_payment == "bi-semanalmente":
             if type_of_payment == "semanalmente":
                 if find_day(day, month, year) == 4:
-                    payment = employee.type_of_worker.paid() - sindicate
+                    payment = employee.paid() - sindicate
                     print(f"O empregado {employee.Id} foi pago R$ {payment}")
             elif type_of_payment == "mensalmente":
                 if day == last_day(month, year):
-                    payment = employee.type_of_worker.paid() - sindicate
+                    payment = employee.paid() - sindicate
                     print(f"O empregado {employee.Id} foi pago R$ {payment}")
             elif type_of_payment == "bi-semanalmente":
                 days = two_weeks(4, month, year)
                 if day in days:
-                    payment = employee.type_of_worker.paid() - sindicate
+                    payment = employee.paid() - sindicate
                     print(f"O empregado {employee.Id} foi pago R$ {payment}")
         else:
             lst = convert(str(type_of_payment))
             if len(lst) == 2:
                 if lst[1] == "$":
                     if day == last_day(month, year):
-                        payment = employee.type_of_worker.paid() - sindicate
+                        payment = employee.paid() - sindicate
                         print(f"O empregado {employee.Id} foi pago R$ {payment}")
                 else:
                     if day == int(lst[1]):
-                        payment = employee.type_of_worker.paid() - sindicate
+                        payment = employee.paid() - sindicate
                         print(f"O empregado {employee.Id} foi pago R$ {payment}")
             else:
                 if lst[1] == "1":
                     date = str_to_int(lst[2])
                     if find_day(day, month, year) == date:
-                        payment = employee.type_of_worker.paid() - sindicate
+                        payment = employee.paid() - sindicate
                         print(f"O empregado {employee.Id} foi pago R$ {payment}")
                 elif lst[1] == "2":
                     date = str_to_int(lst[2])
                     days = two_weeks(int_to_str(date), month, year)
                     if day in days:
-                        payment = employee.type_of_worker.paid() - sindicate
+                        payment = employee.paid() - sindicate
                         print(f"O empregado {employee.Id} foi pago R$ {payment}")
